@@ -1,0 +1,8 @@
+<div class="d-flex h-100">
+  <div class="m-auto">
+    {{#each model as |question|}}
+      {{#link-to "questions.edit" question}}{{question.title}}{{/link-to}}
+      <br>
+    {{/each}}
+  </div>
+</div>
