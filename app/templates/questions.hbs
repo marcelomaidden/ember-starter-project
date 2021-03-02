@@ -1,36 +1,5 @@
 <div class="d-flex mt-5 flex-column">
-  <div class="input-group mb-1 mt-5 w-50 mx-auto">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
-    </div>
-    <input 
-      type="text" 
-      class="form-control" 
-      aria-label="Title" 
-      aria-describedby="inputGroup-sizing-default"
-      value={{model.title}}
-    />
-  </div>
-
-  <div class="input-group mt-5 w-50 mx-auto">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Description</span>
-    </div>
-    <textarea class="form-control" rows='10' aria-label="Description">
-      {{model.description}}
-    </textarea>
-  </div>
-
-  <div class="input-group mb-1 mt-5 w-50 mx-auto">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Tags</span>
-    </div>
-    <input 
-      type="text" 
-      class="form-control" 
-      aria-label="Tags" 
-      aria-describedby="inputGroup-sizing-default"
-      value= {{model.tags}}
-    />
-  </div>
+  {{question-form title=model.title description=model.description
+  tags=model.tags
+  }}
 </div>
