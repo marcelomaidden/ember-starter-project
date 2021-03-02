@@ -1,8 +1,22 @@
-<div class="d-flex h-100">
-  <div class="m-auto">
+<div class="d-flex h-100 flex-column pt-5">
+  <div class="m-auto w-75 pt-5">
+    <h1 class = 'h2'>Expert Advice</h1>
+    <p>Get answers to difficult questions</p>
+    <div class='d-flex justify-content-between mb-5'>
+      <input type='text' class='form-control w-50' placeholder="search" />
+      <button type='button' class='btn btn-primary'>Ask a question</button>
+    </div>    
+    <h2 class='h4'>Questions</h2>
     {{#each model as |question|}}
-      {{#link-to "questions" question}}{{question.title}}{{/link-to}}
-      <br>
+      <div class='mb-3'>
+        {{#link-to "questions" question}}{{question.title}}{{/link-to}}
+        <div>
+          {{#each question.tags as |tag|}}
+            <span class='btn btn-primary'>{{tag.name}}</span>
+          {{/each}}
+        </div>        
+      </div>
+      
     {{/each}}
   </div>
 </div>
