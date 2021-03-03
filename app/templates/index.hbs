@@ -4,7 +4,7 @@
     <p>Get answers to difficult questions</p>
     <div class='d-flex justify-content-between mb-5'>
       <input type='text' class='form-control w-50' placeholder="search" />
-      <button type='button' class='btn btn-primary'>Ask a question</button>
+      {{#link-to "ask" class='btn btn-primary'}}Ask a question{{/link-to}}
     </div>    
     <h2 class='h4'>Questions</h2>
     {{#each model as |question|}}
