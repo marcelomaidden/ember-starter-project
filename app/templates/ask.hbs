@@ -1,3 +1,41 @@
-<div class="d-flex mt-5 flex-column">
-  {{question-form}}
+<div class="d-flex h-100">
+  <div class="m-auto">
+    <form>
+      <div class="form-group {{if model.errors.title 'has-error'}}">
+        <label for="exampleInputEmail1">Title</label>
+        {{input value=model.title type="text" class="form-control" 
+        aria-describedby="emailHelp" placeholder="Enter title"}}
+
+        {{#if model.errors.title}}
+          <div class="text-danger">
+            {{model.errors.title.firstObject.message}}
+          </div>
+        {{/if}}
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        {{textarea value=model.description class="form-control" 
+        id="description" placeholder="Enter description"}}
+        {{#if model.errors.description}}
+          <div class="text-danger">
+            {{model.errors.description.firstObject.message}}
+          </div>
+        {{/if}}
+      </div>
+      <div class="form-group">
+        <label for="tags">Tags</label>
+        {{textarea value=model.tags class="form-control" 
+        id="tags" placeholder="Comma separated tags"}}
+      </div>
+      <button type="submit" class="btn btn-primary" 
+      {{action 'create'}}>
+        Save
+      </button>
+      <div class='text-danger mt-3'>
+        {{#if errorMessage}}
+          {{errorMessage}}
+        {{/if}}
+      </div>
+    </form>
+  </div>
 </div>

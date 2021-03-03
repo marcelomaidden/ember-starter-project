@@ -2,4 +2,8 @@
   {{question-form title=model.title description=model.description
   tags=model.tags
   }}
+  <button type="submit" class="btn btn-primary w-50 mx-auto" {{action 'create'}}>Save</button>
+  {{#if errorMessage}}
+    {{errorMessage}}
+  {{/if}}
 </div>
