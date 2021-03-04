@@ -6,6 +6,7 @@ export default Service.extend({
   session: service("session"),
   store: service(),
   account: alias("user.account"),
+  questions: alias("user.questions"),
   isAuthenticated: alias("session.isAuthenticated"),
   load() {
     if (this.get("session.isAuthenticated")) {

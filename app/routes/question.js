@@ -17,7 +17,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
       })
       model.set('tags', tags.slice(0, tags.length - 1));
     }
-    
     if (Number(this.currentSession.user.id) === Number(model.user.id))
       model.set('user', model.user.id)
   },

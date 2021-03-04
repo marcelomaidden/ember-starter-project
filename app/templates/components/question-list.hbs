@@ -1,0 +1,10 @@
+<div class='mb-3'>
+  {{#link-to url question}}{{question.title}}{{/link-to}}
+  <div>
+    {{#if question.tags}}
+      {{#each question.tags as |tag|}}
+        <span class='btn btn-primary'>{{tag.name}}</span>
+      {{/each}}
+    {{/if}}
+  </div>        
+</div>

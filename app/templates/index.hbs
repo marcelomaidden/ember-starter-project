@@ -8,15 +8,7 @@
     </div>    
     <h2 class='h4'>Questions</h2>
     {{#each model as |question|}}
-      <div class='mb-3'>
-        {{#link-to "questions" question}}{{question.title}}{{/link-to}}
-        <div>
-          {{#each question.tags as |tag|}}
-            <span class='btn btn-primary'>{{tag.name}}</span>
-          {{/each}}
-        </div>        
-      </div>
-      
+      {{question-list question=question url="question"}}
     {{/each}}
   </div>
 </div>

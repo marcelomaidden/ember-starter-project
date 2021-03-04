@@ -1,0 +1,9 @@
+<div class="d-flex flex-column pt-5">
+  <div class="m-auto w-75 pt-5">
+    <h1 class = 'h2'>My questions</h1>
+    {{#each currentSession.questions as |question|}}
+      {{question-list question=question url="questions"}}
+    {{/each}}
+  </div>
+</div>
+
