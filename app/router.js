@@ -12,7 +12,7 @@ Router.map(function() {
   this.route("signup");
   this.route("dashboard");
   this.route("question-edit", { path: 'question-edit/:id' });
-  this.route('question', { path: 'question/:id' });
+  this.route('question-slug-from-title', { path: 'question-slug-from-title/:id' });
   this.route('ask')
 });
 

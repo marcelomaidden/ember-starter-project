@@ -9,7 +9,7 @@
     <h2 class='h4'>Questions</h2>
     {{#each model as |question|}}
       <div class='mb-3'>
-        {{#link-to 'question' question}}{{question.title}}{{/link-to}}
+        {{#link-to 'question-slug-from-title' question}}{{question.title}}{{/link-to}}
         <div>
           {{#if question.tags}}
             {{#each question.tags as |tag|}}

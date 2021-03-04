@@ -46,7 +46,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
       }        
       else {
         const question = this.controller.model;
-        console.log(question)
         await question.deleteRecord()
         if (question.isDeleted)
         {
