@@ -1,8 +1,17 @@
 <div class="d-flex flex-column pt-5">
   <div class="m-auto w-75 pt-5">
     <h1 class = 'h2'>My questions</h1>
-    {{#each currentSession.questions as |question|}}
-      {{question-list question=question url="questions"}}
+    {{#each questions as |question|}}
+      <div class='mb-3'>
+        {{#link-to 'question-edit' question}}{{question.title}}{{/link-to}}
+        <div>
+          {{#if question.tags}}
+            {{#each question.tags as |tag|}}
+              <span class='btn btn-primary'>{{tag.name}}</span>
+            {{/each}}
+          {{/if}}
+        </div>        
+      </div>
     {{/each}}
   </div>
 </div>
