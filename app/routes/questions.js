@@ -4,10 +4,12 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 
 export default Route.extend(AuthenticatedRouteMixin, {
   currentSession: inject(),
+  oldTags: [],
   model(params) {
     return this.store.findRecord('question', params.id);
   },
   afterModel(model) {
+    this.oldTags = model.tags;
     if (model.tags) {
       let tags = '';
       model.tags.forEach(tag => {
@@ -39,7 +41,10 @@ export default Route.extend(AuthenticatedRouteMixin, {
       });
       const question = this.controller.model;
       if (Number(this.currentSession.user.id) !== Number(question.user))
+      {
+        question.set('tags', this.oldTags);
         this.controller.set("errorMessage", 'User is not allowed to delete this question');
+      }        
       else {
         const question = this.controller.model;
         await question.deleteRecord()
@@ -49,13 +54,18 @@ export default Route.extend(AuthenticatedRouteMixin, {
           this.transitionTo('index')
         }        
         else
+        {
           this.controller.set('errorMessage', 'An error ocurred while trying to delete');
+          model.set('tags', this.oldTags);
+        }
       }
     },
     async update() {
       const question = this.controller.model;
-      if (Number(this.currentSession.user.id) !== Number(question.user))
+      if (Number(this.currentSession.user.id) !== Number(question.user)) {
+        question.set('tags', this.oldTags);
         this.controller.set("errorMessage", 'User is not allowed to change this question');
+      }
       else {
         await question.save()
         .then(() => this.transitionTo('index'))
