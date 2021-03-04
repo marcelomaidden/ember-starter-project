@@ -33,6 +33,10 @@ export default Route.extend(AuthenticatedRouteMixin, {
       });
     },
     async delete() {
+      this.disconnectOutlet({
+        outlet: 'modal',
+        parentView: 'application'
+      });
       const question = this.controller.model;
       if (Number(this.currentSession.user.id) !== Number(question.user))
         this.controller.set("errorMessage", 'User is not allowed to delete this question');
