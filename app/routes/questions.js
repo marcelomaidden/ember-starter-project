@@ -7,10 +7,22 @@ export default Route.extend(AuthenticatedRouteMixin, {
   model(params) {
     return this.store.findRecord('question', params.id);
   },
+  afterModel(model) {
+    if (model.tags) {
+      let tags = '';
+      model.tags.forEach(tag => {
+        tags += `${tag.name},`;
+      })
+      model.set('tags', tags.slice(0, tags.length - 1));
+    }
+    
+    if (Number(this.currentSession.user.id) === Number(model.user.id))
+      model.set('user', model.user.id)
+  },
   actions: {
     async update() {
       const question = this.controller.model;
-      if (Number(this.currentSession.user.id) !== Number(question.user.id))
+      if (Number(this.currentSession.user.id) !== Number(question.user))
         this.controller.set("errorMessage", 'User is not allowed to change this question');
       else {
         await question.save()
