@@ -20,6 +20,22 @@ export default Route.extend(AuthenticatedRouteMixin, {
       model.set('user', model.user.id)
   },
   actions: {
+    async delete() {
+      const question = this.controller.model;
+      if (Number(this.currentSession.user.id) !== Number(question.user))
+        this.controller.set("errorMessage", 'User is not allowed to delete this question');
+      else {
+        const question = this.controller.model;
+        await question.deleteRecord()
+        if (question.isDeleted)
+        {
+          question.save();
+          this.transitionTo('index')
+        }        
+        else
+          this.controller.set('errorMessage', 'An error ocurred while trying to delete');
+      }
+    },
     async update() {
       const question = this.controller.model;
       if (Number(this.currentSession.user.id) !== Number(question.user))
