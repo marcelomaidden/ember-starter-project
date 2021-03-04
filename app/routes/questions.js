@@ -20,6 +20,18 @@ export default Route.extend(AuthenticatedRouteMixin, {
       model.set('user', model.user.id)
   },
   actions: {
+    openModal: function(modalName) {
+      return this.render(modalName, {
+        into: 'application',
+        outlet: 'modal'
+      });
+    },
+    closeModal: function() {
+      return this.disconnectOutlet({
+        outlet: 'modal',
+        parentView: 'application'
+      });
+    },
     async delete() {
       const question = this.controller.model;
       if (Number(this.currentSession.user.id) !== Number(question.user))
