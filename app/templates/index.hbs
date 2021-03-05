@@ -13,7 +13,8 @@
         <div>
           {{#if question.tags}}
             {{#each question.tags as |tag|}}
-              <span class='btn btn-primary'>{{tag.name}}</span>
+              <a class='btn btn-primary text-white' 
+              href='/index/1/{{tag.id}}'>{{tag.name}}</a>
             {{/each}}
           {{/if}}
         </div>        
@@ -23,7 +24,8 @@
   <ul class='d-flex list-unstyled w-75 m-auto'>
       {{#each model.pages as |page|}}
         <li class='mr-2'>
-          <a class = 'btn btn-primary text-white' href='/index/{{page}}'>{{page}}</a>
+          <a class = 'btn btn-primary text-white' 
+          href='/index/{{page}}/{{model.filter}}'>{{page}}</a>
         </li>
       {{/each}}
   </ul>

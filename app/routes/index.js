@@ -1,8 +1,19 @@
 import Route from '@ember/routing/route';
 
 export default Route.extend({
-  model(params={id: 1}) {
-    return this.store.query('question', {page: params.id});
+  filter: 'all',
+  model(params={page:1, tag:'all'}) {
+    const filterParams = {
+      page: params.page
+    }
+
+    this.filter = params.tag;
+    if (params.tag && params.tag !== 'all')
+      filterParams.tag = params.tag;
+
+    return this.store.query('question', 
+      filterParams
+    );
   },
   afterModel(model) {
     let page = 1;
@@ -14,5 +25,6 @@ export default Route.extend({
       }
     }
     model.set('pages',pages);
+    model.set('filter', this.filter);
   }
 });

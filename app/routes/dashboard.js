@@ -4,12 +4,18 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 
 export default Route.extend(AuthenticatedRouteMixin, {
   currentSession: inject(),
-  model(params={id: 1}) {
+  filter: 'all',
+  model(params={page: 1, tag: 'all'}) {
+    const filterParams = {
+      user: this.currentSession.user.id, 
+      page: params.page,
+    }
+    this.filter = params.tag;
+    if (params.tag && params.tag !== 'all') 
+      filterParams.tag = params.tag;
+
     return this.store.query('question', 
-      {
-        user: this.currentSession.user.id, 
-        page: params.id
-      }
+      filterParams
     );
   },
   afterModel(model) {
@@ -22,5 +28,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
       }
     }
     model.set('pages',pages);
+    model.set('filter', this.filter);
   }
 });
