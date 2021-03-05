@@ -15,6 +15,7 @@ export default Model.extend({
       return {}
     }
   }),
+  pages: attr("string"),
   answers: attr({
     defaultValue() {
       return {}

@@ -20,4 +20,11 @@
       </div>
     {{/each}}
   </div>
+  <ul class='d-flex list-unstyled w-75 m-auto'>
+      {{#each model.pages as |page|}}
+        <li class='mr-2'>
+          <a class = 'btn btn-primary text-white' href='/index/{{page}}'>{{page}}</a>
+        </li>
+      {{/each}}
+  </ul>
 </div>

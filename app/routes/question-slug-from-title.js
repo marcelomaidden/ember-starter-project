@@ -7,8 +7,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   question: '',
   model(params) {
     this.question = this.store.findRecord('question', params.id);
-
-    return this.store.createRecord('answer', {question: this.question});    
+    return this.store.createRecord('answer', {body: '', question: this.question});    
   },
   actions: {
     async create() {
@@ -17,7 +16,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
       answer.set('question', questionModel.id);
       answer.set('user', this.currentSession.user.id);
       answer.set('body', this.controller.model.body);
-      this.model = answer;
       await answer.save()
       .then(() => this.transitionTo('index'))
       .catch(

@@ -1,6 +1,6 @@
 <div class="d-flex flex-column pt-5">
   <div class="m-auto w-75 pt-5">
-    <h1 class = 'h2'>My questions</h1>
+    <h1 class = 'h2'>List of questions</h1>
     {{#each questions as |question|}}
       <div class='mb-3'>
         {{#link-to 'question-edit' question}}{{question.title}}{{/link-to}}
@@ -10,9 +10,17 @@
               <span class='btn btn-primary'>{{tag.name}}</span>
             {{/each}}
           {{/if}}
-        </div>        
+        </div>   
+        <span>{{question.user.email}}</span>   
       </div>
     {{/each}}
   </div>
+  <ul class='d-flex list-unstyled w-75 m-auto'>
+    {{#each questions.pages as |page|}}
+      <li class='mr-2'>
+        <a class = 'btn btn-primary text-white' href='/dashboard/{{page}}'>{{page}}</a>
+      </li>
+    {{/each}}
+  </ul>
 </div>
 

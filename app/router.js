@@ -7,10 +7,10 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route("index", { path: "" });
+  this.route("index", { path: "index/:id" });
   this.route("login");
   this.route("signup");
-  this.route("dashboard");
+  this.route("dashboard", { path: "dashboard/:id" });
   this.route("question-edit", { path: 'question-edit/:id' });
   this.route('question-slug-from-title', { path: 'question-slug-from-title/:id' });
   this.route('ask')

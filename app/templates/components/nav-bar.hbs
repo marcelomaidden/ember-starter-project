@@ -1,7 +1,7 @@
 {{#bs-navbar type="dark" backgroundColor="dark" class="fixed-top shadow flex-md-nowrap" collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
   <div class="navbar-header">
     {{navbar.toggle}}
-    {{#link-to "index" class="navbar-brand"}}Expert Advice{{/link-to}}
+    {{#link-to "index" "1" class="navbar-brand"}}Expert Advice{{/link-to}}
   </div>
   {{#navbar.content}}
     {{#navbar.nav class="ml-auto" as |nav|}}
@@ -9,7 +9,7 @@
         {{#nav.dropdown as |dd|}}
           {{#dd.toggle}}{{currentSession.user.email}} <span class="caret"></span>{{/dd.toggle}}
           {{#dd.menu as |ddm|}}
-            {{#ddm.item}}{{#ddm.link-to "dashboard"}}Dashboard{{/ddm.link-to}}{{/ddm.item}}
+            {{#ddm.item}}{{#ddm.link-to "dashboard" "1"}}Dashboard{{/ddm.link-to}}{{/ddm.item}}
             <div class="dropdown-divider"></div>
             {{#ddm.item}}<a href="#" class="dropdown-item" {{action 'logout'}}>Sign out</a>{{/ddm.item}}
           {{/dd.menu}}
