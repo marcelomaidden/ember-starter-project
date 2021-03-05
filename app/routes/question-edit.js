@@ -4,7 +4,7 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 
 export default Route.extend(AuthenticatedRouteMixin, {
   currentSession: inject(),
-  oldTags: [],
+  oldTags: '',
   model(params) {
     return this.store.findRecord('question', params.id);
   },
@@ -55,7 +55,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
         else
         {
           this.controller.set('errorMessage', 'An error ocurred while trying to delete');
-          model.set('tags', this.oldTags);
+          question.set('tags', this.oldTags);
         }
       }
     },

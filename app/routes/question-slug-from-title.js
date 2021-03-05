@@ -4,76 +4,28 @@ import AuthenticatedRouteMixin from "ember-simple-auth/mixins/authenticated-rout
 
 export default Route.extend(AuthenticatedRouteMixin, {
   currentSession: inject(),
-  oldTags: [],
+  question: '',
   model(params) {
-    return this.store.findRecord('question', params.id);
-  },
-  afterModel(model) {
-    this.oldTags = model.tags;
-    if (model.tags) {
-      let tags = '';
-      model.tags.forEach(tag => {
-        tags += `${tag.name},`;
-      })
-      model.set('tags', tags.slice(0, tags.length - 1));
-    }
-    if (Number(this.currentSession.user.id) === Number(model.user.id))
-      model.set('user', model.user.id)
+    this.question = this.store.findRecord('question', params.id);
+
+    return this.store.createRecord('answer', {question: this.question});    
   },
   actions: {
-    openModal: function(modalName) {
-      return this.render(modalName, {
-        into: 'application',
-        outlet: 'modal'
-      });
-    },
-    closeModal: function() {
-      return this.disconnectOutlet({
-        outlet: 'modal',
-        parentView: 'application'
-      });
-    },
-    async delete() {
-      this.disconnectOutlet({
-        outlet: 'modal',
-        parentView: 'application'
-      });
-      const question = this.controller.model;
-      if (Number(this.currentSession.user.id) !== Number(question.user))
-      {
-        question.set('tags', this.oldTags);
-        this.controller.set("errorMessage", 'User is not allowed to delete this question');
-      }        
-      else {
-        const question = this.controller.model;
-        await question.deleteRecord()
-        if (question.isDeleted)
-        {
-          question.save();
-          this.transitionTo('index')
-        }        
-        else
-        {
-          this.controller.set('errorMessage', 'An error ocurred while trying to delete');
-          model.set('tags', this.oldTags);
+    async create() {
+      const questionModel = this.controller.model;
+      const answer = await this.store.createRecord('answer');
+      answer.set('question', questionModel.id);
+      answer.set('user', this.currentSession.user.id);
+      answer.set('body', this.controller.model.body);
+      this.model = answer;
+      await answer.save()
+      .then(() => this.transitionTo('index'))
+      .catch(
+        ({errors}) => {
+          this.controller.set("errors", errors)
+          this.controller.set("errorMessage", 'Please, fix all errors and try again');
         }
-      }
-    },
-    async update() {
-      const question = this.controller.model;
-      if (Number(this.currentSession.user.id) !== Number(question.user)) {
-        question.set('tags', this.oldTags);
-        this.controller.set("errorMessage", 'User is not allowed to change this question');
-      }
-      else {
-        await question.save()
-        .then(() => this.transitionTo('index'))
-        .catch(
-          () => {
-            this.controller.set("errorMessage", 'Please, fix all errors and try again');
-          }
         )
-      }
     }
   }
 });

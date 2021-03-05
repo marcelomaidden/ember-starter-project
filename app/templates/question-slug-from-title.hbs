@@ -1,16 +1,25 @@
 <div class="d-flex h-100 mt-5">
   <div class="m-auto w-100">
-    <h1 class = 'h4 w-50 m-auto'>Question</h1>
-    <h2 class='w-50 m-auto'>{{model.title}}</h2>
-    <p class='w-50 m-auto'>{{model.description}}</p>
+    <h1 class = 'h4 w-50 m-auto pb-5'>Question</h1>
+    <h2 class='w-50 m-auto pb-5'>{{model.title}}</h2>
+    <p class='w-50 m-auto pb-5'>{{model.description}}</p>
     <form>
       <h3 class='w-50 h4 m-auto'>Answer</h3>
       <div class="w-50 m-auto pt-3">
-        <div class='w-100'>Body</div>
-        <div class="w-100">
-          {{textarea rows='5' class='form-control'}}
-        </div>
-        
+      <div class="form-group w-100 mb-3 pt-3 {{if errors 'has-error'}}">
+        <label for="tags">Body</label>
+        {{textarea value=model.body class="form-control" 
+        rows='5'
+        placeholder="Enter your answer"}}
+      </div>
+      {{#if errors}}
+        {{#each errors as |error|}}
+          <div class="text-danger">
+            {{error.detail}}
+          </div>
+        {{/each}}
+      {{/if}}
+      
         <button type="submit" class="w-100 m-auto btn btn-primary" 
         {{action 'create'}}>
           Save
@@ -22,5 +31,15 @@
         </div>
       </div>
     </form>
+    <div class="w-50 m-auto pt-5">
+      <h4>Answers from the community</h4>
+      {{#each model.answers as |answer|}}
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <p class="card-text">{{answer.body}}</p>
+          </div>
+        </div>
+      {{/each}}
+    </div>
   </div>
 </div>
