@@ -17,7 +17,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       answer.set('user', this.currentSession.user.id);
       answer.set('body', this.controller.model.body);
       await answer.save()
-      .then(() => this.transitionTo('index', 1))
+      .then(() => this.transitionTo('index', 1, 'all'))
       .catch(
         ({errors}) => {
           this.controller.set("errors", errors)

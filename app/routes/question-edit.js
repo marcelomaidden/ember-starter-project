@@ -50,7 +50,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
         if (question.isDeleted)
         {
           question.save();
-          this.transitionTo('index', 1)
+          this.transitionTo('index', 1, 'all')
         }        
         else
         {
@@ -67,7 +67,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
       }
       else {
         await question.save()
-        .then(() => this.transitionTo('index', 1))
+        .then(() => this.transitionTo('index', 1, 'all'))
         .catch(
           () => {
             this.controller.set("errorMessage", 'Please, fix all errors and try again');

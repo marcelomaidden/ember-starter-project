@@ -21,7 +21,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   afterModel(model) {
     let page = 1;
     let pages = [];
-    if (model.content.firstObject) {
+    if (model.content) {
       while(page <= Number(model.content.firstObject.__data.pages)) {
         pages.push(page);
         page++;
