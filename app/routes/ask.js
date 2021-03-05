@@ -12,7 +12,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
     async create() {
       const question = this.controller.model;
       await question.save()
-      .then(() => this.transitionTo('index'))
+      .then(() => this.transitionTo('index', 1))
       .catch(
         () => {
           this.controller.set("errorMessage", 'Please, fix all errors and try again');
