@@ -24,6 +24,9 @@ You will need the following things properly installed on your computer.
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 * Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
+## Live version
+[Expert Device Front-end](https://enigmatic-peak-99233.herokuapp.com/index/1/all)
+
 ### Code Generators
 
 Make use of the many generators for code, try `ember help generate` for more details
@@ -46,7 +49,11 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+In order to deploy you project run the commands below
+
+`heroku create --buildpack https://codon-buildpacks.s3.amazonaws.com/buildpacks/heroku/emberjs.tgz`
+`git push heroku main`
+`heroku open`
 
 ## Further Reading / Useful Links
 
