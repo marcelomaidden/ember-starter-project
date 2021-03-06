@@ -50,6 +50,8 @@ module.exports = function(environment) {
 
   if (environment === "production") {
     // here you can enable a production-specific feature
+    ENV.serverURL = "https://marcelomaidden-expert-api.herokuapp.com";
+    ENV.webURL = "http://localhost";
   }
 
   ENV.apiBaseURL = ENV.serverURL + "/" + ENV.apiNamespace;
