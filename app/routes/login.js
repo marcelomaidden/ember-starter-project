@@ -7,7 +7,7 @@ export default Route.extend({
     login(email, password) {
       this.get("session")
         .authenticate("authenticator:oauth2", email, password)
-        .then(() => this.transitionTo("index", 1))
+        .then(() => this.transitionTo("dashboard"))
         .catch(() => {
           this.controller.set("errorMessage", "Invalid login.");
         });

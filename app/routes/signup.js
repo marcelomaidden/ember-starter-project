@@ -15,7 +15,7 @@ export default Route.extend({
         user.email,
         user.password
       );
-      this.transitionTo("index", 1);
+      this.transitionTo('dashboard');
     }
   }
 });
